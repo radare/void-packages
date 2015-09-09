@@ -1,11 +1,11 @@
 # Template file for 'rust'
 pkgname=rust
 version=0.12.0
-revision=1
+revision=2
 lib32disabled=yes
 build_style=configure
 only_for_archs="x86_64 i686"
-configure_args="--prefix=/usr --disable-docs"
+configure_args="--prefix=/usr --disable-docs --release-channel=stable"
 hostmakedepends="which pkg-config perl curl python chrpath"
 short_desc="A safe, concurrent, practical language"
 maintainer="Juan RP <xtraeme@gmail.com>"
