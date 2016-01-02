@@ -15,6 +15,10 @@ license="MIT"
 distfiles="https://github.com/docker/compose/archive/${version}.tar.gz"
 checksum=8f0851b417d89bc5023e72918233449a0fa72d9952ac66494c1b37434516583d
 
+pre_build() {
+	sed -i '/requests/s|, < 2.8||' setup.py
+}
+
 post_install() {
 	vlicense LICENSE
 }
