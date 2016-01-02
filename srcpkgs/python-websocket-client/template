@@ -1,0 +1,28 @@
+# Template file for 'python-websocket-client'
+pkgname=python-websocket-client
+version=0.34.0
+revision=1
+noarch=yes
+wrksrc="websocket_client-${version}"
+build_style=python-module
+python_versions="2.7 3.4"
+hostmakedepends="python-setuptools python3.4-setuptools"
+depends="python"
+pycompile_module="websocket-client"
+short_desc="Use the pseudo-tty of a docker container (Python2)"
+maintainer="Sergi Alvarez <pancake@nopcode.org>"
+homepage="https://github.com/docker/websocket-client"
+license="LGPL-2.1"
+distfiles="${PYPI_SITE}/w/websocket-client/websocket_client-${version}.tar.gz"
+checksum=682a6241ca953499f06ca506f69aa3ea26f0ed2a41fe7982732cb8449ae92ddf
+
+python3.4-websocket-client_package() {
+	noarch=yes
+	depends="python3.4"
+	pycompile_version="3.4"
+	pycompile_module="websocket-client"
+	short_desc="${short_desc/Python2/Python3.4}"
+	pkg_install() {
+		vmove usr/lib/python3.4
+	}
+}
