@@ -1,0 +1,23 @@
+# Template file for 'docker-machine-bin'
+pkgname=docker-machine-bin
+version=0.5.5
+revision=1
+homepage="https://docs.docker.com/machine/"
+license="Apache-2.0"
+short_desc="Machine management for a container-centric world"
+maintainer="Sergi Alvarez <pancake@nopcode.org>"
+only_for_archs="x86_64"
+
+if [ "$XBPS_TARGET_MACHINE" = "x86_64" ]; then
+	distfiles="https://github.com/docker/machine/releases/download/v${version}/docker-machine_linux-amd64"
+	checksum="b05a7373a1894af49626fe902e4f31be0fad271f3502ca2a3aa07a70d343e865"
+fi
+
+do_extract() {
+	:
+}
+
+do_install() {
+	ls ${XBPS_SRCDISTDIR}/${pkgname}-${version}/
+	vbin ${XBPS_SRCDISTDIR}/${pkgname}-${version}/docker-machine_linux-amd64 docker-machine
+}
