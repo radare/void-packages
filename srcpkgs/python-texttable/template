@@ -8,8 +8,8 @@ build_style=python-module
 python_versions="2.7 3.4"
 hostmakedepends="python-setuptools python3.4-setuptools"
 depends="python"
-pycompile_module="texttable"
-short_desc="Generate formatted text table using ASCII characters"
+pycompile_module="texttable.py"
+short_desc="Python2 module for creating simple ASCII tables"
 maintainer="Sergi Alvarez <pancake@nopcode.org>"
 homepage="https://github.com/foutaise/texttable/"
 license="LGPL-3"
@@ -20,7 +20,7 @@ python3.4-texttable_package() {
 	noarch=yes
 	depends="python3.4"
 	pycompile_version="3.4"
-	pycompile_module="texttable"
+	pycompile_module="texttable.py"
 	short_desc="${short_desc/Python2/Python3.4}"
 	pkg_install() {
 		vmove usr/lib/python3.4

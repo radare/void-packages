@@ -7,9 +7,9 @@ wrksrc="dockerpty-${version}"
 build_style=python-module
 python_versions="2.7 3.4"
 hostmakedepends="python-setuptools python3.4-setuptools"
-depends="python python-docker-py>=0.3.2"
+depends="python-six python-docker-py"
 pycompile_module="dockerpty"
-short_desc="Use the pseudo-tty of a docker container (Python2)"
+short_desc="Python2 library to use the pseudo-tty of a docker container"
 maintainer="Sergi Alvarez <pancake@nopcode.org>"
 homepage="https://github.com/d11wtq/dockerpty"
 license="Apache-2.0"
@@ -18,7 +18,7 @@ checksum=a51044cc49089a2408fdf6769a63eebe0b16d91f34716ecee681984446ce467d
 
 python3.4-dockerpty_package() {
 	noarch=yes
-	depends="python3.4"
+	depends="python3.4-six python3.4-docker-py"
 	pycompile_version="3.4"
 	pycompile_module="dockerpty"
 	short_desc="${short_desc/Python2/Python3.4}"
