@@ -1,0 +1,73 @@
+# Template file for 'swift'
+pkgname=swift
+version=2.2
+revision=1
+depends="libxml2-devel libuuid-devel libbsd-devel icu-devel libedit-devel sqlite-devel"
+only_for_archs="i686 x86_64"
+_arch="${XBPS_TARGET_MACHINE}"
+hostmakedepends="cmake pkg-config"
+makedepends="ninja cmake icu swig clang python perl ${depends}"
+short_desc=" The Swift Programming Language"
+maintainer="pancake <pancake@nopcode.org>"
+license="Apache-2.0"
+homepage="https://www.swift.org/"
+_head="https://github.com/apple/"
+_tail="archive/${pkgname}-${version}-RELEASE.tar.gz"
+wrksrc="swift-swift-${version}-RELEASE"
+distfiles="
+${_head}/swift/${_tail}>swift-${version}.tar.gz
+${_head}/swift-llvm/${_tail}>swift-llvm-${version}.tar.gz
+${_head}/swift-clang/${_tail}>swift-clang-${version}.tar.gz
+${_head}/swift-lldb/${_tail}>swift-lldb-${version}.tar.gz
+${_head}/swift-cmark/${_tail}>swift-cmark-${version}.tar.gz
+"
+checksum="
+6dfb9de14201b9804974b1f221573cfb3e24fd657ec3bf132bf3c75de02565f5
+b975b816773aa9d888a9139f51acd1b57fd58959bb391f8f65645a2f9b6d4cc4
+ba9220e61971a55d13f501dc30f452a5c272e4d897b444a5220f2e23dbbfc2f8
+b562fee1963900c86fed016408e3acbb63500a3603f4af70928c11ce376b9a72
+09c8da18c37f32cd0eb82b252a172481f5403c1bc6ab5740f92e87f8d1e79991
+83d9d99b635bbc6b95d52b645df97140d5596cfb746001d67bf9e8d5824fb339
+"
+
+# EXPERIMENTAL DEPENDENCIES
+# =========================
+# swift-llbuild
+# swift-package-manager
+# swift-corelibs-xctest
+# swift-corelibs-foundation
+
+do_build() {
+	(
+		cd ..
+		for a in swift llvm clang lldb cmark; do
+			ln -sf swift-${a}-swift-${version}-RELEASE ${a}
+		done
+	)
+	export LDFLAGS="-ldl -lpthread"
+	utils/build-script -R -t -j${XBPS_MAKEJOBS}
+}
+
+do_install() {
+	vlicense LICENSE.txt
+	cd ../build/Ninja-ReleaseAssert
+	cd swift-linux-${_arch}
+	vmkdir usr/bin
+	vinstall bin/swift 755 /usr/bin
+	vinstall bin/swiftc 755 /usr/bin
+	vinstall bin/swift-demangle 755 /usr/bin
+	vinstall bin/swift-autolink-extract 755 /usr/bin
+	vman docs/tools/swift.1
+	vmkdir usr/lib/swift
+	cp -rf lib/swift/* ${PKGDESTDIR}/usr/lib/swift
+
+# EXPERIMENTAL
+#	(
+#		cd foundation-linux-${_arch}
+#		vinstall Foundation/libFoundation.so 755 /usr/lib/swift/linux
+#		vinstall Foundation/libFoundation.swiftdoc 644 /usr/lib/swift/linux/${_arch}
+#		vinstall Foundation/libFoundation.swiftmodule 644 /usr/lib/swift/linux/${_arch}
+#		umask 0022
+#		cp -r Foundation/usr/lib/swift/CoreFoundation ${PKGDESTDIR}/usr/lib/swift
+#	)
+}
