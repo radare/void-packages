@@ -40,9 +40,10 @@ b562fee1963900c86fed016408e3acbb63500a3603f4af70928c11ce376b9a72
 do_build() {
 	(
 		cd ..
-		for a in swift llvm clang lldb cmark; do
+		for a in llvm clang lldb cmark; do
 			ln -sf swift-${a}-swift-${version}-RELEASE ${a}
 		done
+		ln -sf swift-swift-${version}-RELEASE swift
 	)
 	export LDFLAGS="-ldl -lpthread"
 	utils/build-script -R -t -j${XBPS_MAKEJOBS}
