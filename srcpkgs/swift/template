@@ -50,7 +50,7 @@ do_build() {
 
 do_install() {
 	vlicense LICENSE.txt
-	cd ../build/Ninja-ReleaseAssert/swift-linux-${XBPS_TARGET_ARCH}
+	cd ../build/Ninja-ReleaseAssert/swift-linux-${XBPS_TARGET_MACHINE}
 	vbin bin/sil-opt
 	vbin bin/sil-extract
 	vbin bin/swift
