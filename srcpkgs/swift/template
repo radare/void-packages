@@ -3,7 +3,7 @@ pkgname=swift
 version=2.2
 revision=1
 nocross=yes
-makedepends="libxml2-devel libuuid-devel libbsd-devel icu-devel libedit-devel sqlite-devel"
+makedepends="libxml2-devel libuuid-devel libbsd-devel icu-devel libedit-devel"
 only_for_archs="i686 x86_64 armv7l aarch64 mips mipsel"
 hostmakedepends="pkg-config ninja cmake icu swig clang python perl"
 short_desc="The Swift Programming Language"
@@ -43,6 +43,7 @@ do_build() {
 			ln -sf swift-${a}-swift-${version}-RELEASE ${a}
 		done
 		ln -sf swift-swift-${version}-RELEASE swift
+		sed -i 's|/usr/include/x86_64-linux-gnu|/usr/include|g' clang/lib/Driver/ToolChains.cpp
 	)
 	export LDFLAGS="-ldl -lpthread"
 	utils/build-script -R -t -j${XBPS_MAKEJOBS}
