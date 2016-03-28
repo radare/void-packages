@@ -1,10 +1,10 @@
 # Template file for 'swift'
 pkgname=swift
 version=2.2
-revision=1
+revision=2
 nocross=yes
 makedepends="libxml2-devel libuuid-devel libbsd-devel icu-devel libedit-devel"
-only_for_archs="i686 x86_64 armv7l aarch64 mips mipsel"
+only_for_archs="x86_64"
 hostmakedepends="pkg-config ninja cmake icu swig clang python perl"
 short_desc="The Swift Programming Language"
 maintainer="pancake <pancake@nopcode.org>"
@@ -60,8 +60,7 @@ do_install() {
 	vbin bin/swift-autolink-extract
 	vman docs/tools/swift.1
 	vmkdir usr/lib/swift
-	cp -rf lib/swift/* ${PKGDESTDIR}/usr/lib/swift
-
+	vcopy lib/swift/* usr/lib/swift
 # EXPERIMENTAL
 #	(
 #		cd foundation-linux-${_arch}
