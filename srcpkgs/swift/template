@@ -1,7 +1,7 @@
 # Template file for 'swift'
 pkgname=swift
 version=2.2
-revision=2
+revision=1
 nocross=yes
 makedepends="libxml2-devel libuuid-devel libbsd-devel icu-devel libedit-devel"
 only_for_archs="x86_64"
@@ -60,6 +60,7 @@ do_install() {
 	vbin bin/swift-autolink-extract
 	vman docs/tools/swift.1
 	vmkdir usr/lib/swift
+	rm -r -f lib/swift/install-tmp
 	rm -f lib/swift/clang
 	vcopy lib/swift/* usr/lib/swift
 	vmkdir usr/lib/swift/clang/include
