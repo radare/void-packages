@@ -61,6 +61,8 @@ do_install() {
 	vman docs/tools/swift.1
 	vmkdir usr/lib/swift
 	vcopy lib/swift/* usr/lib/swift
+	vmkdir usr/lib/swift/clang/include
+	vcopy ../llvm-linux-${XBPS_TARGET_MACHINE}/lib/clang/3.8.0/include/* usr/lib/swift/clang/include
 # EXPERIMENTAL
 #	(
 #		cd foundation-linux-${_arch}
